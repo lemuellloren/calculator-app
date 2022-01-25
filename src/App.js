@@ -104,6 +104,20 @@ const App = () => {
     });
   };
 
+  
+  // * percentClickHandler Function 
+  const percentClickHandler = () => {
+    let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
+    let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
+
+    setCalc({
+      ...calc,
+      num: (num /= Math.pow(100, 1)),
+      res: (res /= Math.pow(100, 1)),
+      sign: "",
+    });
+  };
+
   return (
     <Wrapper>
       <Screen value={calc.num ? calc.num : calc.res} />
