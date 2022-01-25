@@ -94,6 +94,16 @@ const App = () => {
     }
   };
 
+  // * invertClickHandler Function 
+  const invertClickHandler = () => {
+    setCalc({
+      ...calc,
+      num: calc.num ? toLocaleString(removeSpaces(calc.num) * -1) : 0,
+      res: calc.res ? toLocaleString(removeSpaces(calc.res) * -1) : 0,
+      sign: "",
+    });
+  };
+
   return (
     <Wrapper>
       <Screen value={calc.num ? calc.num : calc.res} />
