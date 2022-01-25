@@ -12,9 +12,9 @@ const btnValues = [
   [0, ".", "="],
 ];
 
-// * Input formatting
 const toLocaleString = (num) =>
   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
+
 const removeSpaces = (num) => num.toString().replace(/\s/g, "");
 
 const App = () => {
@@ -24,27 +24,24 @@ const App = () => {
     res: 0,
   });
 
-  // * Numclicker Function 
   const numClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
 
-    if (calc.num.length < 16) {
+    if (removeSpaces(calc.num).length < 16) {
       setCalc({
         ...calc,
         num:
           calc.num === 0 && value === "0"
             ? "0"
-            : calc.num % 1 === 0
-            ? Number(calc.num + value)
-            : calc.num + value,
+            : removeSpaces(calc.num) % 1 === 0
+            ? toLocaleString(Number(removeSpaces(calc.num + value)))
+            : toLocaleString(calc.num + value),
         res: !calc.sign ? 0 : calc.res,
       });
     }
   };
 
-
-  // * commaClickHandler Function 
   const commaClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -55,7 +52,6 @@ const App = () => {
     });
   };
 
-  // * signClickHandler Function 
   const signClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
@@ -68,8 +64,6 @@ const App = () => {
     });
   };
 
-  
-  // * equalsClickHandler Function 
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
       const math = (a, b, sign) =>
@@ -99,7 +93,6 @@ const App = () => {
     }
   };
 
-  // * invertClickHandler Function 
   const invertClickHandler = () => {
     setCalc({
       ...calc,
@@ -109,8 +102,6 @@ const App = () => {
     });
   };
 
-  
-  // * percentClickHandler Function 
   const percentClickHandler = () => {
     let num = calc.num ? parseFloat(removeSpaces(calc.num)) : 0;
     let res = calc.res ? parseFloat(removeSpaces(calc.res)) : 0;
@@ -123,7 +114,6 @@ const App = () => {
     });
   };
 
-  // * resetClickHandler Fucntion 
   const resetClickHandler = () => {
     setCalc({
       ...calc,
@@ -165,6 +155,5 @@ const App = () => {
     </Wrapper>
   );
 };
-
 
 export default App;
